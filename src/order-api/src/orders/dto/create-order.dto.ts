@@ -20,7 +20,6 @@ export class OrderItemDto {
     quantity: number;
 
     @MaxLength(36)
-    @IsPositive()
     @IsString()
     @IsNotEmpty()
     product_id: string;
