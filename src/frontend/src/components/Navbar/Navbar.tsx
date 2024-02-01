@@ -6,9 +6,10 @@ import { SelectCategory } from "./SelectCategory";
 import Image from "next/legacy/image";
 import HomeIcon from "@mui/icons-material/Home";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { CategoryService } from "@/services/category.service";
 
 export async function Navbar() {
-
+  const categories = await new CategoryService().getCategories();
   return (
     <AppBar position="fixed">
       <Toolbar sx={{ backgroundColor: "background.paper" }}> 
@@ -37,7 +38,7 @@ export async function Navbar() {
           p: 1,
         }}
       >
-        <SelectCategory categories={[]} />
+        <SelectCategory categories={categories} />
 
         <Box
           component={Link}

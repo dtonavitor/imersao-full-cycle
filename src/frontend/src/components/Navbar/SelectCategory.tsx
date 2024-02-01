@@ -7,14 +7,19 @@ import { searchProducts } from "../../utils";
 import { Category } from "../../models";
 
 export function SelectCategory({ categories }: { categories: Category[] }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   return (
     <FormControl size="small" sx={{ width: 200 }}>
       <Select
         // className="select-category"
         name="select-category"
         sx={{ backgroundColor: grey[400] }}
+        value={searchParams.get("category_id") || "0"}
         onChange={(event) => {
-          
+          const search = searchParams.get("search");
+          const category_id = event.target.value as string;
+          searchProducts(router, search, category_id);
         }}
       >
         <MenuItem value="0">Todas as categorias</MenuItem>
