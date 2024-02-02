@@ -29,7 +29,7 @@ func (o *OrderRequest) Validate() error {
 	return nil
 }
 
-func (o *OrderRequest) Proccess() (*OrderResponse, error) {
+func (o *OrderRequest) Process() (*OrderResponse, error) {
 	if err := o.Validate(); err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ func (o *OrderRequest) Proccess() (*OrderResponse, error) {
 
 type OrderResponse struct {
 	OrderID string `json:"order_id"`
-	Status  string `json:"status"`
+	Status  string `json:"status"` // paid, failed
 }
 
 func NewOrderResponse(orderID, status string) *OrderResponse {

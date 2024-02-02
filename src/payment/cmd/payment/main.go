@@ -28,7 +28,7 @@ func main() {
 			slog.Error(err.Error())
 			break
 		}
-		response, err := orderRequest.Proccess()
+		response, err := orderRequest.Process()
 		if err != nil {
 			slog.Error(err.Error())
 			break
