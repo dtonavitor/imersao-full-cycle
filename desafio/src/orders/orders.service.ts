@@ -14,21 +14,32 @@ export class OrdersService {
 
   async create(createOrderDto: CreateOrderDto) {
     try {
-      const asset = await this.assetRepo.findOneByOrFail({
+      let asset = await this.assetRepo.findOneBy({
         id: createOrderDto.asset_id,
       });
+
+      
+      if (!asset && !createOrderDto.symbol) {
+        return {
+          message: 'Asset não encontrado. Informe o símbolo do ativo.',
+          status: 404,
+        };
+      } else if (!asset && createOrderDto.symbol) {
+        asset = this.assetRepo.create({
+          id: createOrderDto.asset_id,
+          symbol: createOrderDto.symbol,
+        });
+      }
 
       const order = this.orderRepo.create({
         ...createOrderDto,
         asset: asset,
       });
 
-      return this.orderRepo.save(order);
+      await this.orderRepo.save(order);
+      return order;
     } catch (error) {
-        return {
-          "message": 'Asset não encontrado',
-          "status": 404,
-        }
+      console.log(error);
     }
   }
 

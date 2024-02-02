@@ -1,0 +1,24 @@
+GET http://localhost:3000/api/assets
+
+###
+POST http://localhost:3000/api/assets
+Content-Type: application/json
+
+{
+    "id": 2,
+    "symbol": "TAEA3"
+}
+
+###
+GET http://localhost:3000/api/orders
+
+###
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+#caso o asset não exista é necessário passar o symbol como parâmetro
+{
+    "asset_id": 2,
+    "quantity": 1,
+    "price": 50
+}
